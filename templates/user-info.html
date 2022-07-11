@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}User Info{% endblock %}
+
+{% block content %}
+
+<div class="display-1 text-center">My Account</div>
+
+<div class="container">
+
+    <div class="row justify-content-center">
+        <div class="card mt-5 col-6 bg-light" >
+            <div class="row justify-content-center">
+                <div class="text-center my-3">
+                    <span class="text-center h2">Username:</span><span class="h5"> {{user.username}}</span>
+                </div>
+            </div>
+        
+            <div class="row justify-content-center">
+                <div class="text-center my-3">
+                    <span class="text-center h2">First Name:</span><span class="h5"> {{user.first_name}}</span>
+                </div>
+            </div>
+        
+            <div class="row justify-content-center">
+                <div class="text-center my-3">
+                    <span class="text-center h2">Last Name:</span><span class="h5"> {{user.last_name}}</span>
+                </div>
+            </div>
+        
+            <div class="row justify-content-center">
+                <div class="text-center my-3">
+                    <span class="text-center h2">Email:</span><span class="h5"> {{user.email}}</span>
+                </div>
+            </div>
+
+            <form action="/users/{{user.username}}/delete" method="post" class="text-center">
+                <button class="btn btn-outline-danger mb-3 text-center">Delete User Profile</button>
+            </form>
+        
+        </div>
+    </div>
+
+    <div class="display-4 text-center mb-3 mt-5">User Feedback</div>
+
+    {% for post in feedback %}
+    <div class="row justify-content-center">
+        <div class="card bg-light mt-2 col-6">
+
+            <div class="row justify-content-center">
+                <div class="text-center my-3">
+                    <span class="text-center h1">{{post.title}}</span>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="text-center my-3">
+                    <span class="text-center"><b>{{post.content}}</b></span>
+                </div>
+            </div>
+
+            <form class="mb-4">
+                <button class="btn btn-outline-success" formaction="/feedback/{{post.id}}/update" formmethod="get">Edit</button>
+                <button class="btn btn-outline-danger" formaction="/feedback/{{post.id}}/delete" formmethod="post">Delete</button>
+            </form>
+                
+            
+        
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="row justify-content-center">
+        
+       <a href="/users/{{user.username}}/feedback/add" class="text-center"><button class="btn btn-lg col-6 btn-outline-primary mt-3 mb-5">Add Feedback</button></a> 
+    
+    </div>
+    
+    
+</div>
+
+{% endblock %}
